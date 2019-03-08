@@ -18,12 +18,11 @@ class Article extends Model
 	public $id;
 	public $title;
 	public $content;
-	
+
 	public static function findLast($count)
 	{
 		$db = new Db();
 		$sql = "SELECT * FROM " . static::$table . " ORDER BY id DESC LIMIT :count ";
 		return $db->query($sql, [':count' => $count], static::class);
 	}
-	
 }

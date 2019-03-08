@@ -18,28 +18,28 @@ class Db
 	{
 		$this->dbh->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
 		$sth = $this->dbh->prepare($sql);
-//		var_dump($sth);die;
-		if(false === $sth->execute($params)){
+
+		if (false === $sth->execute($params)) {
 			return false;
 		}
-		if(null === $class){
+		if (null === $class) {
 			return $sth->fetchAll(\PDO::FETCH_ASSOC);
 		}
 		$ret = [];
-		while($row = $sth->fetchObject($class)){
+		while ($row = $sth->fetchObject($class)) {
 			$ret[] = $row;
 		}
-		if(empty($ret)){
+		if (empty($ret)) {
 			return false;
 		}
 		return $ret;
 	}
 
-	public function execute($query, $params=[]){
-		if(isset($params[':email'])){
+	public function execute($query, $params = [])
+	{
+		if (isset($params[':email'])) {
 			$filterResult = filter_var($params[':email'], FILTER_VALIDATE_EMAIL);
-//			var_dump($filterResult);die;
-			if($filterResult == false){
+			if ($filterResult == false) {
 				$result['Error'] = 'E-mail не прошел валидацию';
 				return $result;
 			}
@@ -50,8 +50,9 @@ class Db
 		}
 		return $result;
 	}
-	
-	public function lastInsertString(){
+
+	public function lastInsertString()
+	{
 		return $this->dbh->lastInsertId();
 	}
 }
