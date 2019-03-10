@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 08 2019 г., 19:15
+-- Время создания: Мар 10 2019 г., 03:17
 -- Версия сервера: 5.7.16-log
 -- Версия PHP: 7.0.14
 
@@ -59,26 +59,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`) VALUES
-(1, 'test@test.com', '123456'),
-(2, 'app@a.ru', 'qwerty'),
-(3, 'execute@test.com', 'executeTest'),
-(24, 'exete@test.com', 'executeTest'),
-(25, '1@test.com', 'exe1uteTest'),
-(26, 'execu767@test.com', 'execut676eTest'),
-(28, 'execu67@test.com', 'eecut676eTest'),
-(31, 'excu67@test.com', 'eect676eTest'),
-(33, 'ecu67@test.com', 'ect676eTest'),
-(51, 'ecu7@test.com', 'ect66eTest'),
-(53, 'a@am.com', 'hhh'),
-(55, 'a@am.co', 'hh'),
-(59, 'a@am.cob', 'hbh'),
-(61, 'a@am.cjob', 'hbjh'),
-(64, 'a@am.chob', 'jh'),
-(66, 'a@am.chaaob', 'jaah'),
-(68, 'a@am.chasaob', 'jaash'),
-(70, 'a@am.chasgaob', 'jagash'),
-(72, 'a@am.chassdgaob', 'jagadsdsh'),
-(74, 'a@am.chadssdgaob', 'jagadsddsh');
+(94, 'test@test.com', 'test1234'),
+(97, 'test1@test.com', 'test01234');
 
 --
 -- Индексы сохранённых таблиц
@@ -111,7 +93,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
