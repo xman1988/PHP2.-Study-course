@@ -55,18 +55,10 @@ class Db
 		// Если класс возвращаемых из БД объектов не передан, то метод возвращает массив со статьями
 		if (null === $class) {
 			return $sth->fetchAll(\PDO::FETCH_ASSOC);
-		}
 
-		// Если класс возвращаемых из БД объектов передан, то метод возвращает массив со объектами переданного в $class названия класса
-		$ret = [];
-		while ($row = $sth->fetchObject($class)) {
-			$ret[] = $row;
+		}else{
+			return $sth->fetchAll(\PDO::FETCH_CLASS, $class);
 		}
-		// Если статей в БД нет, то метод возвращает false
-		if (empty($ret)) {
-			return false;
-		}
-		return $ret;
 	}
 
 	/**
