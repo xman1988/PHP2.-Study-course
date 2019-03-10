@@ -14,12 +14,12 @@ if (isset($_GET['id'])) {
 }
 
 /**
- * @var array $data Массив объекта со статьей
+ * @var mixed $data Массив объекта со статьей, либо false в случае ошибки
  */
 $data = Article::findById($articleId);
 
 /**
- * @var object $news Объект со статьей
+ * @var mixed $news Объект со статьей, либо NULL, если массив пуст
  */
 $news = array_pop($data);
 include __DIR__ . '/App/Views/article/article.php';

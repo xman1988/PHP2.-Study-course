@@ -32,7 +32,7 @@ class User extends Model
 	 * @param string $email E-mail пользователя
 	 * @param string $password Пароль пользователя
 	 *
-	 * @return integer|false|array Возвращает номер строки вставленного поля,
+	 * @return mixed Возвращает номер строки вставленного поля,
 	 * либо false в случае ошибки,
 	 * либо массив с текстом ошибки
 	 */
@@ -62,7 +62,7 @@ class User extends Model
 	 *
 	 * @param string $email
 	 *
-	 * @return string|false Возвращает проверенный e-mail,
+	 * @return mixed Возвращает проверенный e-mail,
 	 * либо false в случае если e-mail проверку не прошел
 	 *
 	 */

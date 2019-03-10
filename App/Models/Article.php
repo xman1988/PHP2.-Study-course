@@ -42,7 +42,7 @@ class Article extends Model
 	 *
 	 * @param integer $limit Число выводимых на страницу статей из БД
 	 *
-	 * @return array Массив объектов со статьями
+	 * @return mixed Возвращает массив объектов со статьями, либо false в случае ошибки
 	 */
 	public static function findLast($limit)
 	{

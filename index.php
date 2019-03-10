@@ -10,7 +10,7 @@ require_once __DIR__ . '/autoload.php';
 $articleCount = 3;
 
 /**
- * @var array $data Массив объектов со статьями
+ * @var mixed $data Возвращает массив объектов со статьями, либо false в случае ошибки
  */
 $data = Article::findLast($articleCount);
 include __DIR__ . '/App/Views/index/index.php';
