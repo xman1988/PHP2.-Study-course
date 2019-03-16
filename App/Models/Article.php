@@ -9,7 +9,7 @@
 namespace App\Models;
 
 use app\Model;
-
+use app\Db;
 
 /**
  * Модель работы со статьями

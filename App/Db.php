@@ -2,8 +2,6 @@
 
 namespace app;
 
-use App\Config;
-
 /**
  * Класс работы с БД
  *
@@ -15,37 +13,11 @@ class Db
 	 */
 	protected $dbh;
 
-	/**
-	 * @var string localhost или IP сервера БД
-	 */
-	protected $host;
-
-	/**
-	 * @var string Название БД
-	 */
-	protected $dbName;
-
-	/**
-	 * @var string Имя пользователя БД
-	 */
-	protected $user;
-
-	/**
-	 * @var string Пароль пользователя БД
-	 */
-	protected $password;
-
-	/**
-	 * Создает подключение к БД
-	 */
 	public function __construct()
 	{
-		$config = Config::instance();
-		$this->host = $config->data['db']['host'];
-		$this->dbName = $config->data['db']['dbName'];
-		$this->user = $config->data['db']['user'];
-		$this->password = $config->data['db']['password'];
-		$this->dbh = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbName, $this->user, $this->password);
+		$user = 'root';
+		$pass = '';
+		$this->dbh = new \PDO('mysql:host=localhost;dbname=php2', $user, $pass);
 	}
 
 	/**
@@ -63,11 +35,10 @@ class Db
 	{
 		$sth = $this->dbh->prepare($sql);
 		$sthResult = $sth->execute($params);
-
 		if (false === $sthResult) {
 			return false;
 		}
-
+		
 		// Если класс возвращаемых из БД объектов не передан, то метод возвращает массив со статьями
 		if (null === $class) {
 			return $sth->fetchAll(\PDO::FETCH_ASSOC);
@@ -92,9 +63,9 @@ class Db
 	/**
 	 * Метод возвращает id последней измененной записи
 	 *
-	 * @return string|null Возвращает номер id последней измененной записи, либо NULL в случае неудачи
+	 * @return mixed Возвращает число id последней измененной записи, либо NULL в случае неудачи
 	 */
-	public function lastInsertId()
+	public function lastInsertString()
 	{
 		return $this->dbh->lastInsertId();
 	}

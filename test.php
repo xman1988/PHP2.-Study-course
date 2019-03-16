@@ -13,9 +13,7 @@ $test = new testSQL;
 /**
  * @var array $result Массив с результатами тестирования вставки нового пользователя в БД
  */
-$email = 'test0@test.com';
-$password = 'test0';
-$result = $test->testInsertUser($email, $password);
+$result = $test->testInsertUser();
 
 // Метод вывода результата тестирования на страницу
 $test->render($result);
