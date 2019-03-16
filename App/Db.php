@@ -2,6 +2,8 @@
 
 namespace app;
 
+use App\Config;
+
 /**
  * Класс работы с БД
  *
@@ -13,11 +15,37 @@ class Db
 	 */
 	protected $dbh;
 
+	/**
+	 * @var string localhost или IP сервера БД
+	 */
+	protected $host;
+
+	/**
+	 * @var string Название БД
+	 */
+	protected $dbName;
+
+	/**
+	 * @var string Имя пользователя БД
+	 */
+	protected $user;
+
+	/**
+	 * @var string Пароль пользователя БД
+	 */
+	protected $password;
+
+	/**
+	 * Создает подключение к БД
+	 */
 	public function __construct()
 	{
-		$user = 'root';
-		$pass = '';
-		$this->dbh = new \PDO('mysql:host=localhost;dbname=php2', $user, $pass);
+		$config = Config::instance();
+		$this->host = $config->data['db']['host'];
+		$this->dbName = $config->data['db']['dbName'];
+		$this->user = $config->data['db']['user'];
+		$this->password = $config->data['db']['password'];
+		$this->dbh = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbName, $this->user, $this->password);
 	}
 
 	/**
@@ -27,27 +55,15 @@ class Db
 	 * @param array $params Массив параметров подстановки в подготовленный запрос
 	 * @param string $class Название класса, объекты которого необходимо получить после работы данного метода
 	 *
-	 * @return mixed Возвращает массив объектов со статьями переданного названия класса в параметр $class,
+	 * @return array|false Возвращает массив объектов со статьями переданного названия класса в параметр $class,
 	 * если название класса не передано, то возвращает массив статей,
 	 * либо false в случае ошибки
 	 */
 	public function query($sql, $params = [], $class = null)
 	{
-		// Данная проверка актуальна для php версии ниже 7.1.
-		// Выше версии 7.1.,на сколько я понял, данная проблема была решена.
-		// Fix #73234: Emulated statements let value dictate parameter type
+		$sth = $this->dbh->prepare($sql);
+		$sthResult = $sth->execute($params);
 
-		// Здесь проверяется есть ли LIMIT в запросе или нет, если есть,
-		// то необходимо привязать параметр запроса :limit к переменной $limit,
-		// с обязательным принудительным указанием типа параметра \PDO::PARAM_INT
-		if (isset($params[':limit'])) {
-			$sth = $this->dbh->prepare($sql);
-			$sth->bindParam(':limit', $params[':limit'], \PDO::PARAM_INT);
-			$sthResult = $sth->execute();
-		} else {
-			$sth = $this->dbh->prepare($sql);
-			$sthResult = $sth->execute($params);
-		}
 		if (false === $sthResult) {
 			return false;
 		}
@@ -55,8 +71,7 @@ class Db
 		// Если класс возвращаемых из БД объектов не передан, то метод возвращает массив со статьями
 		if (null === $class) {
 			return $sth->fetchAll(\PDO::FETCH_ASSOC);
-
-		}else{
+		} else {
 			return $sth->fetchAll(\PDO::FETCH_CLASS, $class);
 		}
 	}
@@ -77,9 +92,9 @@ class Db
 	/**
 	 * Метод возвращает id последней измененной записи
 	 *
-	 * @return mixed Возвращает число id последней измененной записи, либо NULL в случае неудачи
+	 * @return string|null Возвращает номер id последней измененной записи, либо NULL в случае неудачи
 	 */
-	public function lastInsertString()
+	public function lastInsertId()
 	{
 		return $this->dbh->lastInsertId();
 	}

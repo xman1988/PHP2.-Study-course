@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__ . '/autoload.php';
 
 use App\Models\Article;
+
+require_once __DIR__ . '/autoload.php';
 
 /**
  * Контроллер вывода страницы статьи на экран
@@ -14,12 +15,9 @@ if (isset($_GET['id'])) {
 }
 
 /**
- * @var mixed $data Массив объекта со статьей, либо false в случае ошибки
+ * @var object|false $data Содержит один объект со статьей, либо false в случае ошибки
  */
 $data = Article::findById($articleId);
 
-/**
- * @var mixed $news Объект со статьей, либо NULL, если массив пуст
- */
-$news = array_pop($data);
+
 include __DIR__ . '/App/Views/article/article.php';

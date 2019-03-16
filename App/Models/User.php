@@ -32,9 +32,9 @@ class User extends Model
 	 * @param string $email E-mail пользователя
 	 * @param string $password Пароль пользователя
 	 *
-	 * @return mixed Возвращает номер строки вставленного поля,
+	 * @return string|false|array Возвращает номер строки вставленного поля,
 	 * либо false в случае ошибки,
-	 * либо массив с текстом ошибки
+	 * либо в случае ошибки валидации данных - массив с текстом ошибки
 	 */
 	public function createUser($email, $password)
 	{
@@ -51,19 +51,19 @@ class User extends Model
 		$db = new Db();
 		$sql = 'INSERT INTO users (email, password) VALUES (:email, :password)';
 		$resultInsert = $db->execute($sql, [':email' => $this->email, ':password' => $this->password]);
-		if ($resultInsert) {
-			return $db->lastInsertString();
+		if ($resultInsert !== false) {
+			return $db->lastInsertId();
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Метод проверки E-mail
 	 *
 	 * @param string $email
 	 *
-	 * @return mixed Возвращает проверенный e-mail,
-	 * либо false в случае если e-mail проверку не прошел
+	 * @return string|false Возвращает проверенный e-mail,
+	 * либо false в случае если e-mail проверку не прошёл
 	 *
 	 */
 	public static function emailValidate($email)

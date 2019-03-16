@@ -2,7 +2,6 @@
 
 namespace App\tests;
 
-use App\Model;
 use App\Models\User;
 
 /**
@@ -25,8 +24,11 @@ class testSQL
 	public function testInsertUser($email = 'test111@test.com', $password = 'test012345')
 	{
 		$newUser = new User();
-		// Создаем новое поле в БД
+
+		// Создаем новое поле в БД, случае удачного создания пользователя,
+		// в $resultInsert записывается номер id первичного ключа созданной записи типа string
 		$resultInsert = $newUser->createUser($email, $password);
+
 		$result = [];
 
 		// В случае неудачи записываем ошибки в массив
@@ -40,11 +42,12 @@ class testSQL
 				. $resultInsert['Error'];
 			return $result;
 		}
+
 		// В случае успеха записываем об этом сообщение в массив
 		$result['Success']['insert'] = 'Тест на вставку тестового поля c id=' . $resultInsert . ' в таблицу users прошел УСПЕШНО!';
 
 		// В случае успеха удаляем только что созданное поле в БД
-		$deleteResult = User::delete($resultInsert);
+		$deleteResult = $newUser->delete($resultInsert);
 		if ($deleteResult) {
 			$result['Success']['deleteTestUser'] = 'Удаление тестового поля c id=' . $resultInsert . ' прошло УСПЕШНО!';
 		} else {
