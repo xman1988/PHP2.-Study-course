@@ -5,9 +5,8 @@ namespace app;
 use App\Config;
 
 /**
- * Класс работы с БД
- *
- */
+* Класс работы с БД
+*/
 class Db
 {
 	/**
@@ -16,36 +15,16 @@ class Db
 	protected $dbh;
 
 	/**
-	 * @var string localhost или IP сервера БД
-	 */
-	protected $host;
-
-	/**
-	 * @var string Название БД
-	 */
-	protected $dbName;
-
-	/**
-	 * @var string Имя пользователя БД
-	 */
-	protected $user;
-
-	/**
-	 * @var string Пароль пользователя БД
-	 */
-	protected $password;
-
-	/**
 	 * Создает подключение к БД
 	 */
 	public function __construct()
 	{
 		$config = Config::instance();
-		$this->host = $config->data['db']['host'];
-		$this->dbName = $config->data['db']['dbName'];
-		$this->user = $config->data['db']['user'];
-		$this->password = $config->data['db']['password'];
-		$this->dbh = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbName, $this->user, $this->password);
+		$host = $config->data['db']['host'];
+		$dbName = $config->data['db']['dbName'];
+		$user = $config->data['db']['user'];
+		$password = $config->data['db']['password'];
+		$this->dbh = new \PDO('mysql:host=' . $host . ';dbname=' . $dbName, $user, $password);
 	}
 
 	/**

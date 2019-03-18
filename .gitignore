@@ -1,0 +1,8 @@
+# phpstorm project files
+.idea
+
+# settings DataBase connection
+App/settings/*
+
+README.md
+
