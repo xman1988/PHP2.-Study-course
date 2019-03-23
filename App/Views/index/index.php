@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View $this
+ */
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +18,9 @@
 	<a href="/admin.php" class="button1 aloneButton">Админ-панель</a>
 </header>
 <section id="cd-timeline" class="cd-container">
-	<?php foreach ($data as $news): ?>
+	<?php foreach ($news as $item): ?>
 		<?php
-		if ($news->id % 2 == 0):
+		if ($item->id % 2 == 0):
 			$image = 'picture';
 		else:
 			$image = 'location';
@@ -26,9 +31,10 @@
 				<img src="/img/cd-icon-<?php echo $image; ?>.svg" alt="<?php echo $image; ?>">
 			</div>
 			<div class="cd-timeline-content">
-				<h2> <?php echo $news->title; ?> </h2>
-				<p><?php echo $news->content; ?></p>
-				<a href="/article.php?id=<?php echo $news->id; ?>" class="cd-read-more">Читать далее</a>
+				<h2> <?php echo $item->title; ?> </h2>
+				<p><?php echo $item->content; ?></p>
+				<p>Автор статьи : <?php echo $item->authorName; ?></p>
+				<a href="/article.php?id=<?php echo $item->id; ?>" class="cd-read-more">Читать далее</a>
 			</div>
 		</div>
 	<?php endforeach; ?>
