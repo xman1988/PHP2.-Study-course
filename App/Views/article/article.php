@@ -15,6 +15,7 @@
 		<div class="cd-timeline-content">
 			<h2> <?php echo $data->title; ?> </h2>
 			<p><?php echo $data->content; ?></p>
+			<p class="author" >Автор статьи: <?php echo $author->name; ?></p>
 		</div>
 	</section>
 </div>

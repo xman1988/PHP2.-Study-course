@@ -37,6 +37,15 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="col-25">
+					<label for="fname">Автор статьи: </label>
+				</div>
+				<div class="col-75">
+					<label for="fname"> <?php echo $authorName; ?></label>
+				</div>
+
+			</div>
+			<div class="row">
 				<input type="submit" value="Сохранить">
 				<input type="reset" value="Очистить">
 			</div>

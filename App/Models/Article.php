@@ -31,7 +31,12 @@ class Article extends Model
 	public $content;
 
 	/**
-	 * Метод получает из БД массив статей, добавляет в массив имена авторов статей 
+	 * @var string $author_id
+	 */
+	public $author_id;
+
+	/**
+	 * Метод получает из БД массив статей, добавляет в массив имена авторов статей
 	 * и возвращает массив со статьями и их авторами
 	 *
 	 * @return array $arr массив со статьями и их авторами
@@ -40,11 +45,11 @@ class Article extends Model
 	{
 		// находим все статьи в БД
 		$arr = Article::findAll();
-		foreach ($arr as $news){
-			
+		foreach ($arr as $news) {
+
 			// если автор статьи указан (т.е. не NULL)
-			if(null !== $news->author_id){
-				
+			if (null !== $news->author_id) {
+
 				// находим поле с именем автора по author_id 
 				$author = Author::findById($news->author_id);
 
@@ -52,13 +57,13 @@ class Article extends Model
 				$news->authorName = $author->name;
 
 				// если автор статьи не указан (т.е. NULL)
-			}else{
+			} else {
 				$news->authorName = 'Автор неизвестен';
 			}
 
 			// если findById при запросе к БД вернет false
-			if(!$news->authorName){
-				$news->authorName  = 'Автор неизвестен';
+			if (!$news->authorName) {
+				$news->authorName = 'Автор неизвестен';
 			}
 		}
 		return $arr;

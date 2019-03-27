@@ -22,7 +22,7 @@ class Author extends Model
 	public $id;
 
 	/**
-	 * @var string $name Имя автора
+	 * @var string $author_id Имя автора
 	 */
 	public $name;
 }

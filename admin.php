@@ -1,16 +1,13 @@
 <?php
 use App\Models\Article;
+use app\View;
 
 require_once __DIR__ . '/autoload.php';
 
-/**
- *
- * @var array|false $data Содержит массив объектов статей из БД,
- * либо двумерный массив статей из БД,
- * либо false в случае ошибки
- *
- */
-$data = Article::findAll();
+$view = new View();
+
+// запрашиваем все статьи с их авторами из БД
+$view->news = Article::getArticles();
 
 //Передаём $data в представление
 include __DIR__ . '/App/Views/admin/admin.php';

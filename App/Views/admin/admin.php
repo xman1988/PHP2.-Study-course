@@ -23,15 +23,17 @@
 					<th>ID</th>
 					<th>Название</th>
 					<th>Текст</th>
+					<th>Автор</th>
 					<th>Действие</th>
 				</tr>
 				<?php $i = 1; ?>
-				<?php foreach ($data as $news): ?>
+				<?php foreach ($view->news as $news): ?>
 					<tr>
 						<th> <?php echo $i; ?> </th>
 						<th> <?php echo $news->id; ?> </th>
 						<th> <?php echo $news->title; ?> </th>
 						<td><?php echo $news->content; ?></td>
+						<th> <?php echo $news->authorName; ?> </th>
 						<th>
 							<a class="bot8" href="/admin/admin_edit.php?id=<?php echo $news->id; ?>">Изменить</a>
 							<a class="bot8" href="/admin/admin_delete.php?id=<?php echo $news->id; ?>">Удалить</a>

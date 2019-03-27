@@ -73,7 +73,7 @@ abstract class Model
 	 * Создает в БД поле со свойствами объекта $this
 	 * и записывает в свойство объекта $this значение первичного ключа id, вставленного поля.
 	 *
-	 * @return void
+	 * @return string|null Возвращает id вставленного поля, либо NULL в случае неудачи
 	 */
 	public function insert()
 	{
@@ -94,7 +94,7 @@ abstract class Model
 		$fieldValues = implode(', ', $binds);
 		$sql = 'INSERT INTO ' . static::$table . ' ( ' . $fieldNames . ' ) ' . ' VALUES ' . ' ( ' . $fieldValues . ' )';
 		$db->execute($sql, $data);
-		$this->id = $db->lastInsertId();
+		return $db->lastInsertId();
 	}
 
 	/**
@@ -130,12 +130,15 @@ abstract class Model
 	/**
 	 * Выбирает метод создания или перезаписи поля в БД, в зависимости от наличия свойства id у объекта
 	 *
-	 * @return void
+	 * @return string|null|void Возвращает id вставленного поля, 
+	 * либо NULL в случае неудачи, 
+	 * либо void в случае перезаписи поля.
+	 * 
 	 */
 	public function save()
 	{
 		if (empty($this->id)) {
-			$this->insert();
+			return $this->insert();
 		} else {
 			$this->update();
 		}
