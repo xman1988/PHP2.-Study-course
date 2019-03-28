@@ -12,7 +12,7 @@
 <div class="colorWrap">
 	<header>
 		<a class="button1 headerLeft" href="/index.php">Главная страница</a>
-		<a class="button2 headerRight" href="/admin/admin_create.php">Создать статью</a>
+		<a class="button2 headerRight" href="/admin/articleCreate.php">Создать статью</a>
 	</header>
 	<div class='main-block'>
 		<div class='articleList'>
@@ -33,8 +33,8 @@
 						<th> <?php echo $news->title; ?> </th>
 						<td><?php echo $news->content; ?></td>
 						<th>
-							<a class="bot8" href="/admin/admin_edit.php?id=<?php echo $news->id; ?>">Изменить</a>
-							<a class="bot8" href="/admin/admin_delete.php?id=<?php echo $news->id; ?>">Удалить</a>
+							<a class="bot8" href="/admin/articleEditForm.php?id=<?php echo $news->id; ?>">Изменить</a>
+							<a class="bot8" href="/admin/articleDelete.php?id=<?php echo $news->id; ?>">Удалить</a>
 						</th>
 					</tr>
 					<?php $i++; ?>

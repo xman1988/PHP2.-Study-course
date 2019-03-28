@@ -16,7 +16,7 @@
 	<h1>Редактировать статью</h1>
 	<div class="container">
 
-		<form name="createArticle" method="post" action="/admin/admin_edit.php?id=<?php echo $article->id; ?>">
+		<form name="createArticle" method="post" action="/admin/articleEdit.php?id=<?php echo $article->id; ?>">
 			<div class="row">
 				<label for="fname">Id статьи № <?php echo $article->id; ?></label>
 			</div>
