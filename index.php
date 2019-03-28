@@ -12,7 +12,3 @@ $view->news = Article::getArticles();
 
 // выводим шаблон представления с набором статей на экран клиента
 echo $view->render(__DIR__ . '/App/Views/index/index.php');
-
-
-
-

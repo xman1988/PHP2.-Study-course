@@ -2,13 +2,17 @@
 
 use App\Models\Article;
 use App\Models\Author;
+use app\View;
 
 require_once __DIR__ . '/autoload.php';
 
+
 /**
  * Контроллер вывода страницы статьи на экран
- *
+ * 
  */
+
+$view = new View();
 
 // $_GET['id'] Содержит id искомой статьи
 if (isset($_GET['id'])) {
@@ -16,9 +20,15 @@ if (isset($_GET['id'])) {
 }
 
 /**
- * @var object|false $data Содержит один объект со статьей, либо false в случае ошибки
+ * @param object|false $view->news Содержит один объект со статьей, либо false в случае ошибки
+ * 
  */
-$data = Article::findById($articleId);
-$author = Author::findById($data->author_id);
+$view->news = Article::findById($articleId);
 
-include __DIR__ . '/App/Views/article/article.php';
+/**
+ * @param  object|false $view->author Содержит один объект таблицы authors, либо false в случае ошибки
+ * 
+ */
+$view->author = Author::findById($view->news->author_id);
+
+echo $view->render( __DIR__ . '/App/Views/article/article.php' );

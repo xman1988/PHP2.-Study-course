@@ -66,8 +66,4 @@ class testSQL
 	 * @return void
 	 *
 	 */
-	public static function render($result = [])
-	{
-		require __DIR__ . '\..\Views\tests\test.php';
-	}
 }

@@ -28,7 +28,3 @@ if (isset($_POST['title']) and isset($_POST['content'])) {
 	$article->save();
 	header('Location: /admin.php');
 }
-
-	
-
-

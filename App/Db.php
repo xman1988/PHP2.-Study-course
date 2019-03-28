@@ -5,8 +5,8 @@ namespace app;
 use App\Config;
 
 /**
-* Класс работы с БД
-*/
+ * Класс работы с БД
+ */
 class Db
 {
 	/**

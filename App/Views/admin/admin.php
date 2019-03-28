@@ -27,16 +27,16 @@
 					<th>Действие</th>
 				</tr>
 				<?php $i = 1; ?>
-				<?php foreach ($view->news as $news): ?>
+				<?php foreach ($news as $item): ?>
 					<tr>
 						<th> <?php echo $i; ?> </th>
-						<th> <?php echo $news->id; ?> </th>
-						<th> <?php echo $news->title; ?> </th>
-						<td><?php echo $news->content; ?></td>
-						<th> <?php echo $news->authorName; ?> </th>
+						<th> <?php echo $item->id; ?> </th>
+						<th> <?php echo $item->title; ?> </th>
+						<td><?php echo $item->content; ?></td>
+						<th> <?php echo $item->authorName; ?> </th>
 						<th>
-							<a class="bot8" href="/admin/articleEditForm.php?id=<?php echo $news->id; ?>">Изменить</a>
-							<a class="bot8" href="/admin/articleDelete.php?id=<?php echo $news->id; ?>">Удалить</a>
+							<a class="bot8" href="/admin/articleEditForm.php?id=<?php echo $item->id; ?>">Изменить</a>
+							<a class="bot8" href="/admin/articleDelete.php?id=<?php echo $item->id; ?>">Удалить</a>
 						</th>
 					</tr>
 					<?php $i++; ?>
@@ -48,4 +48,3 @@
 </div>
 </body>
 </html>
-

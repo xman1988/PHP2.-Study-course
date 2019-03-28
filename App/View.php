@@ -24,7 +24,6 @@ class View implements \Countable, \Iterator
 
 	public function render($template)
 	{
-
 		/**
 		 * Записываем свойство $key(например, 'name') текущего объекта в переменную $$key(т.е. $name)
 		 * и присваемаем ей соответствующее значение $value
@@ -34,7 +33,7 @@ class View implements \Countable, \Iterator
 		foreach ($this as $key => $value) {
 			$$key = $value;
 		}
-		
+
 		// записываем в буфер шаблон представления
 		ob_start();
 		include $template;
@@ -44,7 +43,7 @@ class View implements \Countable, \Iterator
 	}
 
 	/**
-	 * Метод возвращает количество свойств у текущего объекта, 
+	 * Метод возвращает количество свойств у текущего объекта,
 	 * метод интерфейса Countable
 	 *
 	 *

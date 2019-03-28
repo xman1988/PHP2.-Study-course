@@ -128,7 +128,7 @@ abstract class Model
 
 		//склеиваем массив в строку для подстановки в sql запрос
 		$str = implode(', ', $arr);
-		$sql = 'UPDATE ' . static::$table . ' SET ' . $str .' WHERE id = :id';
+		$sql = 'UPDATE ' . static::$table . ' SET ' . $str . ' WHERE id = :id';
 		$params[':id'] = $this->id;
 		$db->execute($sql, $params);
 	}
@@ -136,10 +136,10 @@ abstract class Model
 	/**
 	 * Выбирает метод создания или перезаписи поля в БД, в зависимости от наличия свойства id у объекта
 	 *
-	 * @return string|null|void Возвращает id вставленного поля, 
-	 * либо NULL в случае неудачи, 
+	 * @return string|null|void Возвращает id вставленного поля,
+	 * либо NULL в случае неудачи,
 	 * либо void в случае перезаписи поля.
-	 * 
+	 *
 	 */
 	public function save()
 	{

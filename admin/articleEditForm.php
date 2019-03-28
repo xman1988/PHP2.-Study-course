@@ -24,7 +24,3 @@ if (null === $article->author_id) {
 
 // выводим свойства загруженного из БД объекта статьи в поля формы  
 include __DIR__ . '/../App/Views/admin/adminEditForm.php';
-
-	
-
-

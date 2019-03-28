@@ -6,8 +6,11 @@ require_once __DIR__ . '/autoload.php';
 
 $view = new View();
 
-// запрашиваем все статьи с их авторами из БД
+/**
+ * @param object|false $view->news Содержит один объект таблицы authors, либо false в случае ошибки
+ *
+ */
 $view->news = Article::getArticles();
 
-//Передаём $data в представление
-include __DIR__ . '/App/Views/admin/admin.php';
+// выводим шаблон представления с набором статей на экран клиента
+echo $view->render(__DIR__ . '/App/Views/admin/admin.php');
