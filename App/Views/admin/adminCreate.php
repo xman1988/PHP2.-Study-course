@@ -16,7 +16,7 @@
 	<h1>Создать статью</h1>
 	<div class="container">
 
-		<form name="createArticle" method="post" action="/admin/admin_create.php">
+		<form name="createArticle" method="post" action="/admin/articleCreate.php">
 			<div class="row">
 				<div class="col-25">
 					<label for="fname">Название статьи</label>

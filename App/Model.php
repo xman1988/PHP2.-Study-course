@@ -40,7 +40,7 @@ abstract class Model
 	 * Метод возвращает одно поля из таблицы
 	 * @param int $id первичный ключ искомого поля
 	 *
-	 * @return array|false Возвращает массив объектов класса,
+	 * @return object|false Возвращает объект класса,
 	 * если название класса не передано, то возвращает двумерный массив значений,
 	 * либо false в случае ошибки
 	 */
@@ -105,10 +105,16 @@ abstract class Model
 	public function update()
 	{
 		$db = new Db();
+
 		// получаем список свойств объекта
 		$props = get_object_vars($this);
+
+		// создаем массив, где будут храниться параметры для подстановки в $db->execute($sql, $params)
 		$params = [];
-		$str = '';
+
+		// создаем массив, где будут храниться параметры для подстановки в sql запрос
+		$arr = [];
+
 		foreach ($props as $name => $value) {
 			if ('id' == $name) {
 				continue;
@@ -116,12 +122,12 @@ abstract class Model
 			// формируем массив с параметрами подстановки
 			$params[':' . $name] = $value;
 
-			//собираем строку для подстановки типа $property = :property
-			$str .= $name . '= :' . $name . ', ';
+			//собираем массив для подстановки в sql запрос
+			$arr[$name] = $name . '=:' . $name;
 		}
 
-		// убираем из строки последнюю запятую для корректности запроса
-		$str = substr($str, 0, -2);
+		//склеиваем массив в строку для подстановки в sql запрос
+		$str = implode(', ', $arr);
 		$sql = 'UPDATE ' . static::$table . ' SET ' . $str .' WHERE id = :id';
 		$params[':id'] = $this->id;
 		$db->execute($sql, $params);
@@ -152,7 +158,7 @@ abstract class Model
 	 *
 	 * @return boolean
 	 */
-	public static function delete($id):bool
+	public function delete($id)
 	{
 		$db = new Db();
 		$sql = 'DELETE FROM ' . static::$table . ' WHERE id = :id';
