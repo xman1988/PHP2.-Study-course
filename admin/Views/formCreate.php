@@ -16,7 +16,7 @@
 	<h1>Создать статью</h1>
 	<div class="container">
 
-		<form name="createArticle" method="post" action="/admin/admin_create.php">
+		<form name="createArticle" method="post" action="/admin.php?ctrl=create">
 			<div class="row">
 				<div class="col-25">
 					<label for="fname">Название статьи</label>
@@ -31,6 +31,14 @@
 				</div>
 				<div class="col-75">
 					<textarea id="subject" name="content" placeholder="Напишите текст"></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-25">
+					<label for="fname">Имя автора</label>
+				</div>
+				<div class="col-75">
+					<input type="text" id="fname" name="author" placeholder="Напишите имя автора">
 				</div>
 			</div>
 			<div class="row">

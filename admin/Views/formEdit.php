@@ -15,17 +15,16 @@
 	</header>
 	<h1>Редактировать статью</h1>
 	<div class="container">
-
-		<form name="createArticle" method="post" action="/admin/admin_edit.php?id=<?php echo $article->id; ?>">
+		<form name="createArticle" method="post" action="/admin.php?ctrl=edit&id=<?php echo $this->article->id; ?>">
 			<div class="row">
-				<label for="fname">Id статьи № <?php echo $article->id; ?></label>
+				<label for="fname">Id статьи № <?php echo $this->article->id; ?></label>
 			</div>
 			<div class="row">
 				<div class="col-25">
 					<label for="fname">Название статьи </label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="fname" name="title" value="<?php echo $article->title; ?>">
+					<input type="text" id="fname" name="title" value="<?php echo $this->article->title; ?>">
 				</div>
 			</div>
 			<div class="row">
@@ -33,7 +32,15 @@
 					<label for="subject">Текст статьи</label>
 				</div>
 				<div class="col-75">
-					<textarea id="subject" name="content"><?php echo $article->content; ?></textarea>
+					<textarea id="subject" name="content"><?php echo $this->article->content; ?></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-25">
+					<label for="fname">Автор статьи: </label>
+				</div>
+				<div class="col-75">
+					<label for="fname"> <?php echo $this->article->authorName; ?> </label>
 				</div>
 			</div>
 			<div class="row">

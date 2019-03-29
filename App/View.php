@@ -21,20 +21,8 @@ class View implements \Countable, \Iterator
 	 *
 	 * @return string $content HTML представление из буфера
 	 */
-
 	public function render($template)
 	{
-
-		/**
-		 * Записываем свойство $key(например, 'name') текущего объекта в переменную $$key(т.е. $name)
-		 * и присваемаем ей соответствующее значение $value
-		 * для удобства пользования ей в шаблоне представления.
-		 * Т.е. в представлении вместо foreach( $this->news as ...), будет foreach( $news as ...)
-		 */
-		foreach ($this as $key => $value) {
-			$$key = $value;
-		}
-		
 		// записываем в буфер шаблон представления
 		ob_start();
 		include $template;
@@ -44,7 +32,7 @@ class View implements \Countable, \Iterator
 	}
 
 	/**
-	 * Метод возвращает количество свойств у текущего объекта, 
+	 * Метод возвращает количество свойств у текущего объекта,
 	 * метод интерфейса Countable
 	 *
 	 *

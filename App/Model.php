@@ -73,7 +73,7 @@ abstract class Model
 	 * Создает в БД поле со свойствами объекта $this
 	 * и записывает в свойство объекта $this значение первичного ключа id, вставленного поля.
 	 *
-	 * @return void
+	 * @return string|null Возвращает номер id последней измененной записи, либо NULL в случае неудачи
 	 */
 	public function insert()
 	{
@@ -94,7 +94,7 @@ abstract class Model
 		$fieldValues = implode(', ', $binds);
 		$sql = 'INSERT INTO ' . static::$table . ' ( ' . $fieldNames . ' ) ' . ' VALUES ' . ' ( ' . $fieldValues . ' )';
 		$db->execute($sql, $data);
-		$this->id = $db->lastInsertId();
+		return $db->lastInsertId();
 	}
 
 	/**
@@ -105,10 +105,16 @@ abstract class Model
 	public function update()
 	{
 		$db = new Db();
+
 		// получаем список свойств объекта
 		$props = get_object_vars($this);
+
+		// создаем массив, где будут храниться параметры для подстановки в $db->execute($sql, $params)
 		$params = [];
-		$str = '';
+
+		// создаем массив, где будут храниться параметры для подстановки в sql запрос
+		$arr = [];
+
 		foreach ($props as $name => $value) {
 			if ('id' == $name) {
 				continue;
@@ -116,13 +122,13 @@ abstract class Model
 			// формируем массив с параметрами подстановки
 			$params[':' . $name] = $value;
 
-			//собираем строку для подстановки типа $property = :property
-			$str .= $name . '= :' . $name . ', ';
+			//собираем массив для подстановки в sql запрос
+			$arr[$name] = $name . '=:' . $name;
 		}
 
-		// убираем из строки последнюю запятую для корректности запроса
-		$str = substr($str, 0, -2);
-		$sql = 'UPDATE ' . static::$table . ' SET ' . $str .' WHERE id = :id';
+		//склеиваем массив в строку для подстановки в sql запрос
+		$str = implode(', ', $arr);
+		$sql = 'UPDATE ' . static::$table . ' SET ' . $str . ' WHERE id = :id';
 		$params[':id'] = $this->id;
 		$db->execute($sql, $params);
 	}
@@ -130,12 +136,13 @@ abstract class Model
 	/**
 	 * Выбирает метод создания или перезаписи поля в БД, в зависимости от наличия свойства id у объекта
 	 *
-	 * @return void
+	 * @return string|null|void Возвращает номер id последней вставленной записи, либо NULL в случае неудачи,
+	 * либо void в случае
 	 */
 	public function save()
 	{
 		if (empty($this->id)) {
-			$this->insert();
+			return $this->insert();
 		} else {
 			$this->update();
 		}
@@ -149,7 +156,7 @@ abstract class Model
 	 *
 	 * @return boolean
 	 */
-	public static function delete($id):bool
+	public function delete($id)
 	{
 		$db = new Db();
 		$sql = 'DELETE FROM ' . static::$table . ' WHERE id = :id';

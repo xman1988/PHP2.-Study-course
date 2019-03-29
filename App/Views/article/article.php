@@ -13,8 +13,9 @@
 	<section id="cd-timeline" class="cd-container">
 		<a href="/index.php" class="cd-read-more">Главная</a>
 		<div class="cd-timeline-content">
-			<h2> <?php echo $data->title; ?> </h2>
-			<p><?php echo $data->content; ?></p>
+			<h2> <?php echo $this->article->title; ?> </h2>
+			<p><?php echo $this->article->content; ?></p>
+			<p><?php echo $this->article->author->name; ?></p>
 		</div>
 	</section>
 </div>

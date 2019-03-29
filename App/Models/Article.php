@@ -31,6 +31,11 @@ class Article extends Model
 	public $content;
 
 	/**
+	 * @var string $author_id 
+	 */
+	public $author_id;
+
+	/**
 	 * Метод получает из БД массив статей, добавляет в массив имена авторов статей 
 	 * и возвращает массив со статьями и их авторами
 	 *
@@ -53,12 +58,12 @@ class Article extends Model
 
 				// если автор статьи не указан (т.е. NULL)
 			}else{
-				$news->authorName = 'Автор неизвестен';
+				$news->authorName = 'Без автора';
 			}
 
 			// если findById при запросе к БД вернет false
 			if(!$news->authorName){
-				$news->authorName  = 'Автор неизвестен';
+				$news->authorName  = 'Без автора';
 			}
 		}
 		return $arr;

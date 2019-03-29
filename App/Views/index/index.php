@@ -18,7 +18,7 @@
 	<a href="/admin.php" class="button1 aloneButton">Админ-панель</a>
 </header>
 <section id="cd-timeline" class="cd-container">
-	<?php foreach ($news as $item): ?>
+	<?php foreach ($this->news as $item): ?>
 		<?php
 		if ($item->id % 2 == 0):
 			$image = 'picture';
@@ -34,7 +34,7 @@
 				<h2> <?php echo $item->title; ?> </h2>
 				<p><?php echo $item->content; ?></p>
 				<p>Автор статьи : <?php echo $item->authorName; ?></p>
-				<a href="/article.php?id=<?php echo $item->id; ?>" class="cd-read-more">Читать далее</a>
+				<a href="/?ctrl=article&id=<?php echo $item->id; ?>" class="cd-read-more">Читать далее</a>
 			</div>
 		</div>
 	<?php endforeach; ?>

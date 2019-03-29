@@ -12,7 +12,7 @@
 <div class="colorWrap">
 	<header>
 		<a class="button1 headerLeft" href="/index.php">Главная страница</a>
-		<a class="button2 headerRight" href="/admin/admin_create.php">Создать статью</a>
+		<a class="button2 headerRight" href="/admin.php?ctrl=formCreate">Создать статью</a>
 	</header>
 	<div class='main-block'>
 		<div class='articleList'>
@@ -23,18 +23,20 @@
 					<th>ID</th>
 					<th>Название</th>
 					<th>Текст</th>
+					<th>Автор</th>
 					<th>Действие</th>
 				</tr>
 				<?php $i = 1; ?>
-				<?php foreach ($data as $news): ?>
+				<?php foreach ($this->news as $item): ?>
 					<tr>
 						<th> <?php echo $i; ?> </th>
-						<th> <?php echo $news->id; ?> </th>
-						<th> <?php echo $news->title; ?> </th>
-						<td><?php echo $news->content; ?></td>
+						<th> <?php echo $item->id; ?> </th>
+						<th> <?php echo $item->title; ?> </th>
+						<td><?php echo $item->content; ?></td>
+						<th> <?php echo $item->authorName; ?> </th>
 						<th>
-							<a class="bot8" href="/admin/admin_edit.php?id=<?php echo $news->id; ?>">Изменить</a>
-							<a class="bot8" href="/admin/admin_delete.php?id=<?php echo $news->id; ?>">Удалить</a>
+							<a class="bot8" href="/admin.php?ctrl=formEdit&id=<?php echo $item->id; ?>">Изменить</a>
+							<a class="bot8" href="/admin.php?ctrl=delete&id=<?php echo $item->id; ?>">Удалить</a>
 						</th>
 					</tr>
 					<?php $i++; ?>

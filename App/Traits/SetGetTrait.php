@@ -11,9 +11,9 @@ namespace App\Traits;
  */
 trait SetGetTrait
 {
-	// защищенный массив со свойствами объекта
+// защищенный массив со свойствами объекта
 	protected $data = [];
-	
+
 	/**
 	 * записывает свойства объекта, созданные 'на лету' в защищенное свойство с массивом $data
 	 *
@@ -23,7 +23,7 @@ trait SetGetTrait
 	{
 		$this->data[$name] = $value;
 	}
-	
+
 	/**
 	 * Предоставляет доступ к $data
 	 *
@@ -33,14 +33,15 @@ trait SetGetTrait
 	{
 		return $this->data[$name] ?? null;
 	}
-	
+
 	/**
-	* метод для возможности проверки свойств в $data на существование, т.е isset($data-> some object property)
-    * 
-	* @return boolean 
-	*/
+	 * метод для возможности проверки свойств в $data на существование, т.е isset($data-> some object property)
+	 *
+	 * @return boolean
+	 */
 	public function __isset($name)
 	{
 		return isset($this->data[$name]);
 	}
+
 }
